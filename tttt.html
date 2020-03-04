@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+        }
+        #box{
+            height: 100px;
+            width: 100px;
+            background: red;
+            position: absolute;
+            cursor: move;
+            background-size: 100px 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+</div>
+</body>
+
+<script>
+
+    var box = document.getElementById("box");
+    fztz(box);
+    function fztz(id) {
+        id.onmousedown = function (evt) {
+            var e = evt || event;
+            var ofX = e.offsetX;
+            var ofY = e.offsetY;
+            document.onmousemove = function (evt) {
+                var e = evt || event;
+                var x = e.pageX - ofX;
+                var y = e.pageY - ofY;
+                if (x < 0) {
+                    x = 0;
+                }
+                var maxX = window.innerWidth - id.offsetWidth;
+                if (x > maxX) {
+                    x = maxX;
+                }
+                if (y < 0) {
+                    y = 0;
+                }
+                var maxY = window.innerHeight - id.offsetHeight;
+                if (y > maxY) {
+                    y = maxY;
+                }
+                id.style.left = x + "px";
+                id.style.top = y + "px";
+            }
+            document.onmouseup = function () {
+                document.onmousemove = "";
+            }
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,164 @@
+body{
+    margin: 0;
+}
+.WorkFlowPool{
+    width: 800px;
+    height: 800px;
+    border: 1px solid cornflowerblue;
+    margin: 0px;
+    position: relative;
+    display: inline-block;
+    overflow: auto;
+}
+
+
+.WorkFlowPool .DBNode{
+    border: 1px solid #346789;
+    box-shadow: 2px 2px 19px #aaa;
+    -o-box-shadow: 2px 2px 19px #aaa;
+    -webkit-box-shadow: 2px 2px 19px #aaa;
+    -moz-box-shadow: 2px 2px 19px #aaa;
+    -moz-border-radius: 0.5em;
+    border-radius: 0.5em;
+    opacity: 0.8;
+    width: 40px;
+    height: 40px;
+
+    z-index: 20;
+    /*position: relative;*/
+    background-color: #eeeeef;
+    color: black;
+    font-family: helvetica, sans-serif;
+    padding: 0.5em;
+
+    -webkit-transition: -webkit-box-shadow 0.15s ease-in;
+    -moz-transition: -moz-box-shadow 0.15s ease-in;
+    -o-transition: -o-box-shadow 0.15s ease-in;
+    transition: box-shadow 0.15s ease-in;
+    display: inline-block;
+    position: relative;
+}
+
+.DBNode:hover{
+    box-shadow: 2px 2px 19px #444;
+    -o-box-shadow: 2px 2px 19px #444;
+    -webkit-box-shadow: 2px 2px 19px #444;
+    -moz-box-shadow: 2px 2px 19px #444;
+    opacity: 0.6;
+}
+
+.DBNode .info_text:hover{
+    pointer-events: none;
+}
+
+.WorkFlowPool .info_container{
+    width: 100%;
+    height: 100%;
+    /*background-color: #346789;*/
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-align: center;
+    font-size: 0.9em;
+    user-select: none;
+}
+.info_text{
+    margin-top: 16px;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    transform: translate(-40%,0);
+    user-select: none;
+}
+.info_container img{
+    width: 30px;
+    height: 30px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.DBNode .anchor_container{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+
+.WorkFlowPool .node_anchor{
+    display: inline-block;
+    position:absolute;
+    font-size: 0;
+    /*background-color: #444444;*/
+    z-index: 21;
+}
+
+
+.WorkFlowPool .node_anchor .anchor_circle{
+    fill: #7AB02C;
+    stroke: none;
+}
+
+/*鼠标悬停样式*/
+.WorkFlowPool .node_anchor .anchor_circle_hover{
+    fill: red;
+}
+
+/*连接线*/
+.WorkFlowPool .ConnectionLine {
+    /*border: 1px solid red;*/
+    display: inline-block;
+    position: absolute;
+    z-index: 4;
+}
+
+.ConnectionLine .anchor_connector{
+    overflow: visible;
+    width: 100%;
+    /*height: 100%;*/
+}
+
+.ConnectionLine .connection_path{
+    fill: none;
+    stroke: #346789;
+    stroke-width: 3;
+}
+
+
+.ConnectionLine .connection_arrow{
+    fill: #346789;
+    stroke: #346789;
+    stroke-width: 1;
+}
+
+/*锚点和连线的hover样式*/
+.ConnectionLine .connection_path_hover {
+    fill: none;
+    stroke: red;
+    stroke-width: 3;
+}
+
+.ConnectionLine .connection_arrow_hover {
+    fill: red;
+    stroke: red;
+    stroke-width: 1;
+}
+
+.DBNode[processstate="default"]{
+    background-color: #eeeeef;
+}
+
+.DBNode[processstate="done"]{
+    background-color: red;
+}
+
+.DBNode[processstate="processing"]{
+    background-color: darkgreen;
+    border: 2px solid darkgreen;
+}
+
