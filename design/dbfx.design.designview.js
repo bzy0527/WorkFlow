@@ -717,7 +717,11 @@ i=new DBFX.Design.ToolkitBoxItem,n.GroupDiv.appendChild(i.VisualElement),i.DataC
         n.ItemImage.draggable=!1,
         n.ClientDiv.ondragstart=function(t) {
             var i=t.currentTarget;
-            i!=null&&i.draggable!=undefined&&i.draggable==!0&&(t.dataTransfer.effectAllowed="move",n.dataContext.x=t.offsetX,n.dataContext.y=t.offsetY,DBFX.Web.Controls.Context.DragObject=n.dataContext)
+            i!=null&&i.draggable!=undefined&&i.draggable==!0&&(
+                t.dataTransfer.effectAllowed="move",
+                n.dataContext.x=t.offsetX,
+                n.dataContext.y=t.offsetY,
+                DBFX.Web.Controls.Context.DragObject=n.dataContext)
 
     }
 

@@ -267,8 +267,6 @@ Obj.NodeObj = function (nT) {
 
     }
 
-
-
     //计算节点的样式信息
     no.CalculateStyle = function(){
         var cssObj = window.getComputedStyle(no.VisualElement,null);
