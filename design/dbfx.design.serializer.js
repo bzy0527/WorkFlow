@@ -37,7 +37,7 @@ DBFX.Serializer.FormDesignViewSerializer = function () {
         var fs = new DBFX.Serializer.FormSerializer();
         fs.DeSerialize(xe,c);
 
-        
+
         DBFX.Serializer.DeSerializeCommand("Load", xe, c);
         DBFX.Serializer.DeSerializeCommand("UnLoad", xe, c);
         DBFX.Serializer.DeSerializeCommand("Resume", xe, c);
@@ -46,7 +46,7 @@ DBFX.Serializer.FormDesignViewSerializer = function () {
         DBFX.Serializer.DeSerializeCommand("OnLoad", xe, tc);
         if (tc.OnLoad != undefined)
             c.Load = tc.OnLoad;
-       
+
 
     }
 
@@ -86,7 +86,7 @@ DBFX.Serializer.FormDesignViewSerializer = function () {
         }
 
         DBFX.Serializer.SerialProperty("DeviceBackgroundColor", c.DeviceBackgroundColor, xe);
-        
+
         //系列化名字空间
         var xns = xdoc.createElement("xns");
         xe.appendChild(xns);
@@ -112,7 +112,7 @@ DBFX.Serializer.FormDesignViewSerializer = function () {
             var cxe = xdoc.createElement("c");
             xcs.appendChild(cxe);
 
-           
+
             ControlSerializer.Serialize(cm, cxe, null);
 
 
@@ -244,7 +244,7 @@ DBFX.Serializer.DataModelDesignViewSerializer = function () {
 
             }
 
-            
+
 
         }
 
@@ -295,7 +295,7 @@ DBFX.Serializer.DataModelDesignViewSerializer = function () {
             if (s != null) {
 
                 s.Serialize(schema, xschema, ns);
-                 
+
             }
             xschemas.appendChild(xschema);
         }
@@ -335,7 +335,7 @@ DBFX.Serializer.DataEntityRelationSerializer = function () {
         var pename = xe.getAttribute("ParentEntityName");
         var pname = xe.getAttribute("ParentPropertyName");
 
-        
+
         var cename = xe.getAttribute("ChildEntityName");
         var cname = xe.getAttribute("ChildPropertyName");
 
@@ -423,7 +423,7 @@ DBFX.Serializer.DataEntitySchemaSerializer = function () {
         DBFX.Serializer.SerialProperty("PrimaryKey", c.PrimaryKey, xe);
         DBFX.Serializer.SerialProperty("Top", c.Top, xe);
         DBFX.Serializer.SerialProperty("Left", c.Left, xe);
-        
+
         //系列化实体属性
 
         c.Properties.Values.forEach(function (p) {
@@ -447,7 +447,7 @@ DBFX.Serializer.DataEntitySchemaSerializer = function () {
 //工作流系列化
 DBFX.Design.WFSerializers.WorkflowSerializer = function () {
 
-    
+
     //反系列化
     this.DeSerialize = function (wf, xe, ns) {
 
@@ -485,16 +485,13 @@ DBFX.Design.WFSerializers.WorkflowSerializer = function () {
 
                 }
 
-
             }
-
 
         }
 
         DBFX.Serializer.DeSerialProperty("WFViewScale", wf.SequenceRoot, xe);
     }
 
-    
     //系列化
     this.Serialize = function (wf, xe, ns) {
 

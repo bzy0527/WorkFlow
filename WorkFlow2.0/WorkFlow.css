@@ -126,6 +126,8 @@ html,body{
     flex-direction: column;
     align-items: center;
     padding: 10px 5px;
+    font-size: 0.8em;
+    color: #444444;
 }
 
 .ToolBoxItem .ToolBoxItem_Img{
@@ -224,6 +226,9 @@ html,body{
     align-items: center;
 }
 
+.PlaceHolder:hover{
+    cursor: pointer;
+}
 .PlaceHolder .PlaceHolderTag{
     display: inline-block;
     width: 20px;

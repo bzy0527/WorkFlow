@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>图片预览</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        .block{
+            width: 1000px;
+            left: auto;
+            margin: 0 auto;
+            border: 1px solid black;
+        }
+        .imglist{
+            width: 200px;
+            position: relative;
+            border: 2px solid white;
+            box-shadow: 1px 1px 5px grey;
+        }
+        .imglist:hover{
+            box-shadow: 8px 8px 10px grey;
+        }
+        .ceng{
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .close{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            color: white;
+        }
+        .close:hover{
+            color: red;
+            cursor: pointer;
+        }
+        .kuang{
+            width: 400px;
+            height: 600px;
+            margin: 10px auto;
+            border: 2px solid white;
+            border-radius: 5%;
+            position: relative;
+            overflow: hidden;
+        }
+        .list{
+            width: 400px;
+            height: 600px;
+            position: absolute;
+            list-style: none;
+            overflow: hidden;
+        }
+        .liimg{
+            width: 400px;
+            height: 600px;
+            position: absolute;
+        }
+        .left{
+            position: absolute;
+            top: 250px;
+            left: 0;
+            color: white;
+            font-size:40px;
+            font-weight: bold;
+            z-index: 5;
+        }
+        .left:hover{cursor: pointer;}
+        .right{
+            position: absolute;
+            top:250px;
+            right: 0;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            z-index: 5;
+        }
+        .right:hover{cursor: pointer;}
+    </style>
+</head>
+<body>
+<div class="block"></div>
+<script>
+    var src=["0.png","1.png","2.jpg","3.png"];
+
+    for(var i=0;i<20;i++){
+        /*添加图片*/
+        var img=document.createElement("img");
+        img.src=src[i%4];
+        img.className="imglist";
+        img.style.marginLeft="40px";
+        img.style.marginTop="20px";
+        document.getElementsByClassName("block")[0].appendChild(img);
+        img.index = i;
+        /*img点击时添加浮层*/
+        img.οnclick=function(){
+            var ceng=document.createElement("div");
+            ceng.className="ceng";
+            document.body.appendChild(ceng);
+            /*创建关闭按钮*/
+            var close=document.createElement("span");
+            close.innerHTML="×";
+            close.className="close";
+            ceng.appendChild(close);
+            /*close.addEventListener("click",function(){
+                ceng.remove();
+            }) //谷歌支持 IE不支持*/
+            close.addEventListener("click",function(){
+                document.body.removeChild(ceng);
+            })
+            //创建预览框
+            var kuang=document.createElement("div");
+            kuang.className="kuang";
+            ceng.appendChild(kuang);
+            //给创建的预览框添加 4个ul li
+            var UL=document.createElement("ul");
+            UL.className="ulkuang";
+            kuang.appendChild(UL);
+            for(var k=0;k<4;k++){
+                var list=document.createElement("li");
+                list.className="list";
+                var liimg=document.createElement("img");
+                liimg.className="liimg";
+                liimg.src="./image/"+src[k];
+                UL.appendChild(list);
+                list.appendChild(liimg);
+                /*调整图片层级*/
+                list.style.zIndex=3-k;
+            }
+            //添加左右控件
+            var spanleft=document.createElement("span");
+            spanleft.className="left";
+            spanleft.innerHTML="<";
+            kuang.appendChild(spanleft);
+            spanleft.addEventListener("click",showshift);
+            var spanright=document.createElement("span");
+            spanright.className="right";
+            spanright.innerHTML=">";
+            kuang.appendChild(spanright);
+            spanright.addEventListener("click",showshift);
+
+            //轮换的函数
+            function showshift(e) {
+                if(e.target.className=="left"){
+                    //对象target.className会返回left/right
+                    shift("left");
+                }else {
+                    shift("right");
+                }
+            }
+            function shift(way) { //传way控制向左还是向右翻
+                var Li=document.getElementsByClassName("list");
+                for(var j=0;j<Li.length;j++){
+                    //获取一下
+                    var zindex=parseInt(Li[j].style.zIndex);
+
+                    if(way=="left"){
+                        //向左翻  给每个-1 小于0时 设置为3 再赋值
+                        zindex-=1;
+                        if(zindex<0){
+                            zindex=3;
+                        }
+                    }else {
+                        //向右翻 给每个+1 大于3时 设置为0 再赋值
+                        zindex+=1;
+                        if(zindex>3){
+                            zindex=0;
+                        }
+                    }
+                    Li[j].style.zIndex=zindex;
+                }
+            }
+            /*任意点击一张显示对应的预览图*/
+            for (var b=0;b<this.index%4;b++) {  //this.index===img.index; img.zIndex=i;
+                shift("right");
+            }
+        }
+    }
+</script>
+</body>
+</html>

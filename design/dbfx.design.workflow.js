@@ -16,8 +16,6 @@ DBFX.Design.WFDesignView = function () {
 
         wfdv.VisualElement.ondrop = function (e) {
 
-
-
         }
         wfdv.ClientPanel = new DBFX.Web.Controls.Control("WFDesignViewPanel");
         wfdv.ClientPanel.Class = "VDE_Design_WFView_ClientPanel";
@@ -96,7 +94,7 @@ DBFX.Design.WFDesignView = function () {
     }
 
     wfdv.MouseDown = function (e) {
-    
+
         if (wfdv.ActivedActivity != undefined && wfdv.ActivedActivity != null) {
 
             wfdv.ActivedActivity.ContextMenu =undefined;
@@ -108,7 +106,7 @@ DBFX.Design.WFDesignView = function () {
 
     wfdv.OnObjectSelected = function (a)
     {
-        
+
     }
 
     wfdv.Load = function (e) {
@@ -132,7 +130,6 @@ DBFX.Design.WFDesignView = function () {
 
         if (wfdv.CustomSerializer != undefined)
             wfdv.CustomSerializer.Serialize(wfdv, rootel);
-
 
         return xdoc;
 
@@ -187,7 +184,7 @@ DBFX.Design.WFDesignView = function () {
         wfdv.SequenceRoot.Clear();
     }
 
-   
+
     wfdv.ToCode = function () {
 
         var sw = new DBFX.StringWriter();
@@ -315,6 +312,7 @@ DBFX.Design.WFActivities.ParsingVar = function (v, dt) {
     return v1
 
 }
+
 //流程活动
 DBFX.Design.WFActivities.Activity = function (t) {
 
@@ -352,7 +350,7 @@ DBFX.Design.WFActivities.Activity = function (t) {
 
             wfa.E2CActivity(e);
 
-            
+
         }
 
         //活动折叠按钮
@@ -414,7 +412,6 @@ DBFX.Design.WFActivities.Activity = function (t) {
 
 
     }
-
 
     wfa.DragStart = function (c, e) {
 
@@ -507,7 +504,7 @@ DBFX.Design.WFActivities.Activity = function (t) {
         }
     });
 
-    
+
     Object.defineProperty(wfa, "HideECButton", {
         get: function () {
 
@@ -607,12 +604,12 @@ DBFX.Design.WFActivities.Activity = function (t) {
             wfa.SetActived(v);
         }
     });
-    
+
     wfa.SetActived = function (v) {
 
 
     }
-    
+
     Object.defineProperty(wfa, "DesignView", {
         get: function () {
             return wfa.designView;
@@ -628,7 +625,7 @@ DBFX.Design.WFActivities.Activity = function (t) {
     }
 
     wfa.ToCode = function (sw) {
-        
+
     }
 
     wfa.OnCreateHandle();
@@ -661,20 +658,19 @@ DBFX.Design.WFActivities.PlaceHolder = function () {
         ph.PlaceTag1.allowDrop = true;
     }
 
-
     ph.DragOver = function (sender,e) {
 
-        
+
         ph.PlaceTag1.style.display = "inline-block";
         ph.PlaceBar.style.display = "block";
         e.preventDefault();
         e.cancelBubble = true;
-        
+
 
     }
 
     ph.DragLeave = function (sender,e) {
-        
+
         var rc = ph.VisualElement.getBoundingClientRect();
         if (event.clientX<rc.left || event.clientY<rc.top || event.clientX>rc.right || event.clientY>rc.bottom) {
             ph.PlaceTag1.style.display = "none";
@@ -750,8 +746,8 @@ DBFX.Design.WFActivities.Sequence = function (dv) {
 
         wfseq.HideSettingButton = true;
         wfseq.HideECButton = false;
-        
-        
+
+
     }
 
 
@@ -790,10 +786,10 @@ DBFX.Design.WFActivities.Sequence = function (dv) {
             }
         }
 
-        
-        
+
+
     }
-    
+
     wfseq.InsertPlaceHolder = function (h) {
 
         var ph = new DBFX.Design.WFActivities.PlaceHolder();
@@ -813,7 +809,7 @@ DBFX.Design.WFActivities.Sequence = function (dv) {
         //确定相邻的活动
         var idx = wfseq.ActivitiesPanel.Controls.indexOf(ta)+1;
 
-        
+
         var sa = wfseq.ActivitiesPanel.Controls[idx];
 
         //
@@ -836,7 +832,7 @@ DBFX.Design.WFActivities.Sequence = function (dv) {
             wfseq.Activities.Insert(a, sa);
         else
             wfseq.Activities.Add(a);
-        
+
         a.Parent = wfseq;
 
     }
@@ -885,7 +881,7 @@ DBFX.Design.WFActivities.Sequence = function (dv) {
 
         ta = undefined;
 
-        
+
         //
         a.DesignView = wfseq.DesignView;
         //
@@ -927,7 +923,6 @@ DBFX.Design.WFActivities.Sequence = function (dv) {
         }
 
     }
-
 
     return wfseq;
 
@@ -1156,7 +1151,7 @@ DBFX.Design.WFActivities.ForEach = function () {
             afore.Sequence.ToCode(sw);
             sw.AddLine("}", -4);
         }
-       
+
     }
 
     return afore;
@@ -1229,7 +1224,7 @@ DBFX.Design.WFActivities.While = function () {
             llstr = ce.LogicalLiker;
 
         });
-        
+
         sw.AddLine("while(" + cestr + ")");
         sw.AddLine("{", 4);
         awh.Sequence.ToCode(sw);
@@ -1254,7 +1249,7 @@ DBFX.Design.WFActivities.For = function () {
     afor.initValue = 0;
     afor.limitValue = 0;
     afor.incValue = 1;
-    
+
     afor.Sequence = new DBFX.Design.WFActivities.Sequence(afor.DesignView);
     afor.Sequence.HideHeaderBar = true;
     afor.Sequence.Margin = "0px";
@@ -1401,7 +1396,7 @@ DBFX.Design.WFActivities.SwitchBranch = function () {
 
             }
         });
-        
+
         cseq.HeaderPanel.BackgroundColor = "";// "rgba(225,225,225,0.1)";
         cseq.DesignView = aswb.designView;
         aswb.BranchsPanel.AddControl(cseq);
@@ -1431,7 +1426,7 @@ DBFX.Design.WFActivities.SwitchBranch = function () {
             aswb.selectionVar = v;
             aswb.OnPropertyChanged("SelectionVar", v);
 
-            
+
         }
     });
 
@@ -1477,9 +1472,9 @@ DBFX.Design.WFActivities.Throw = function () {
     //
     athrow.ToCode = function (sw) {
 
-        
+
         sw.AddLine("throw(\""+athrow.Exception+"\");");
-        
+
     }
 
     return athrow;
@@ -1544,7 +1539,7 @@ DBFX.Design.WFActivities.TryCatch = function () {
         sw.AddLine("{", 4);
         atc.CatchSequence.ToCode(sw);
         sw.AddLine("}", -4);
-        
+
 
     }
 
@@ -1610,7 +1605,7 @@ DBFX.Design.WFActivities.CExpressionBuilder = function () {
                 ceb.lvwExpressions.SelectedItem = ceb.lvwExpressions.Controls[idx - 1];
 
         }
-        
+
         if (ceb.cExpressions.length == 0) {
 
             ceb.DesignView.ObjectEditor.ObjectSelected(ceb.Activity);
